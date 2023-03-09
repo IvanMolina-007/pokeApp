@@ -1,0 +1,129 @@
+<section class="register">
+  <div class="register__left-section">
+    <div class="register__title-container">
+      <h1 class="register__title">
+        <img class="register__title__icon" src="assets/arrow_back.svg" alt="">
+        ¡Hola! Configuremos tu perfil
+      </h1>
+      <p class="register__paragraph paragraph">Queremos conocerte mejor.</p>
+    </div>
+
+    <div class="register__card">
+      <h4 class="register__card__title">Imágen perfil</h4>
+      <div class="register__card__image-container">
+        <img [src]="url" alt="" class="register__card__image-container__image">
+      </div>
+      <div class="input-container">
+        <input class="register__card__input" type="file" id="file" class="hidden" (change)="captureImg( $event )">
+        <label class="register__card__input-label" for="file">
+          Adjuntar una foto
+          <img src="assets/cloud-icon.svg" alt="">
+        </label>
+      </div>
+    </div>
+
+  </div>
+
+
+  <div class="right-section">
+    <form class="register__form" [formGroup]="myForm" (ngSubmit)="submit()" autocomplete="off">
+      <h4 class="register__form__title">Tu infomación</h4>
+      <p class="register__form__paragraph paragraph">Completa la siguiente información <br>para completar tu perfil</p>
+
+      <div class="register__form__inputs-container">
+        <!-- Name -->
+        <div>
+          <span class="p-float-label">
+            <input type="text"
+                   class="register__form__inputs-container__name"
+                    pInputText
+                    id="float-input"
+                    formControlName="name">
+            <label for="float-input">Nombre*</label>
+          </span>
+          <span class="form-text text-danger"
+            *ngIf="isValidField('name')">
+            {{ getFieldError('name') }}
+          </span>
+        </div>
+
+        <!-- Hobbies -->
+        <span class="p-float-label" >
+          <p-dropdown [options]="hobbies"
+                      formControlName="hobbies"
+                      optionLabel="name"
+                      placeholder="Pasatiempo favorito ">
+          </p-dropdown>
+          <label for="autocomplete">Pasatiempo favorito</label>
+        </span>
+
+        <!-- <span class="p-float-label">
+          <p-autoComplete [suggestions]="results"
+                          formControlName="hobbies"
+                          (completeMethod)="search($event)"
+                          inputId="autocomplete">
+          </p-autoComplete>
+          <label for="autocomplete">Pasatiempo favorito</label>
+        </span> -->
+
+        <!-- Calendar -->
+        <div class="register__form__calendar">
+          <span class="p-float-label">
+            <p-calendar formControlName="dateOfBirth"
+                        inputId="calendar">
+            </p-calendar>
+            <label for="calendar">Cumpleaños*</label>
+          </span>
+          <span class="form-text text-danger span-block"
+            *ngIf="isValidField('dateOfBirth')">
+            {{ getFieldError('dateOfBirth') }}
+           </span>
+        </div>
+
+        <!-- PPENDING -->
+        <div>
+          <span class="p-float-label">
+            <input type="text"
+                   class="register__form__inputs-container__name"
+                    pInputText
+                    id="float-input"
+                    formControlName="personalID">
+            <label for="float-input">Documento*</label>
+          </span>
+          <span class="form-text text-danger"
+            *ngIf="isValidField('personalID')">
+            {{ getFieldError('personalID') }}
+          </span>
+        </div>
+
+
+
+        <button  type="submit" [disabled]="myForm.invalid">Continuar</button>
+
+      </div>
+
+
+
+
+
+
+    </form>
+
+    <!-- <div>
+      <pre>Valid: {{ myForm.valid | json }}</pre>
+
+      <pre>Pristine: {{ myForm.pristine | json }}</pre>
+
+      <pre>Touched{{ myForm.touched | json }}</pre>
+
+      <pre>Value{{ myForm.value | json }}</pre>
+
+      <pre>Name - Errores: {{ myForm.controls['name'].errors | json }}</pre>
+
+    </div> -->
+
+
+  </div>
+</section>
+
+
