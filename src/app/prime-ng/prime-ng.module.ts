@@ -9,20 +9,19 @@ import {AutoCompleteModule} from 'primeng/autocomplete';
 
 
 
-
+const modules = [
+  InputTextModule,
+  DropdownModule,
+  BrowserModule,
+  BrowserAnimationsModule,
+  CalendarModule,
+  ButtonModule,
+  AutoCompleteModule
+];
 
 
 @NgModule({
   declarations: [],
-  exports:[
-    InputTextModule,
-    DropdownModule,
-    BrowserModule,
-    BrowserAnimationsModule,
-    CalendarModule,
-    ButtonModule,
-    AutoCompleteModule
-  ]
-
+  exports:[...modules]
 })
 export class PrimeNgModule { }

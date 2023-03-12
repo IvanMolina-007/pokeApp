@@ -8,15 +8,20 @@
       <p class="register__paragraph paragraph">Queremos conocerte mejor.</p>
     </div>
 
+    <!-- IMAGE CARD -->
     <div class="register__card">
       <h4 class="register__card__title">Imágen perfil</h4>
       <div class="register__card__image-container">
         <img [src]="url" alt="" class="register__card__image-container__image">
       </div>
       <div class="input-container">
-        <input class="register__card__input" type="file" id="file" class="hidden" (change)="captureImg( $event )">
-        <label class="register__card__input-label" for="file">
-          Adjuntar una foto
+        <input class="register__card__input"
+               type="file"
+               id="file"
+               class="hidden"
+               (change)="captureImg( $event )">
+        <label pla class="register__card__input-label" for="file">
+          Adjuntar Imagen
           <img src="assets/cloud-icon.svg" alt="">
         </label>
       </div>
@@ -47,26 +52,21 @@
           </span>
         </div>
 
-        <!-- Hobbies -->
-        <span class="p-float-label" >
-          <p-dropdown [options]="hobbies"
-                      formControlName="hobbies"
-                      optionLabel="name"
-                      placeholder="Pasatiempo favorito ">
-          </p-dropdown>
+
+        <!-- HOBBIES -->
+        <span class="p-float-label">
+          <p-autoComplete
+                          [suggestions]="filteredHobbies"
+                          (completeMethod)="filterHobbies($event)"
+                          field="name"
+                          inputId="autocomplete"
+                          formControlName="hobbies"
+                          [minLength]="1"></p-autoComplete>
           <label for="autocomplete">Pasatiempo favorito</label>
         </span>
 
-        <!-- <span class="p-float-label">
-          <p-autoComplete [suggestions]="results"
-                          formControlName="hobbies"
-                          (completeMethod)="search($event)"
-                          inputId="autocomplete">
-          </p-autoComplete>
-          <label for="autocomplete">Pasatiempo favorito</label>
-        </span> -->
 
-        <!-- Calendar -->
+        <!-- CALENDAR -->
         <div class="register__form__calendar">
           <span class="p-float-label">
             <p-calendar formControlName="dateOfBirth"
@@ -80,50 +80,43 @@
            </span>
         </div>
 
-        <!-- PPENDING -->
+
+        <!-- PERSONAL ID -->
         <div>
           <span class="p-float-label">
             <input type="text"
                    class="register__form__inputs-container__name"
                     pInputText
                     id="float-input"
+                    #documentIdRef
+
                     formControlName="personalID">
             <label for="float-input">Documento*</label>
           </span>
           <span class="form-text text-danger"
             *ngIf="isValidField('personalID')">
-            {{ getFieldError('personalID') }}
+            {{ getFieldErrorPersonalID('personalID') }}
           </span>
+
         </div>
 
 
-
+        <!-- SUBMIT BUTTON -->
         <button  type="submit" [disabled]="myForm.invalid">Continuar</button>
 
       </div>
-
-
-
-
-
-
     </form>
 
-    <!-- <div>
-      <pre>Valid: {{ myForm.valid | json }}</pre>
+    <div>
 
-      <pre>Pristine: {{ myForm.pristine | json }}</pre>
-
-      <pre>Touched{{ myForm.touched | json }}</pre>
-
-      <pre>Value{{ myForm.value | json }}</pre>
-
-      <pre>Name - Errores: {{ myForm.controls['name'].errors | json }}</pre>
-
-    </div> -->
+      <!-- <pre>documento error: {{ myForm.controls['personalID'].errors | json }}</pre> -->
+      <!-- <pre>Valid: {{ myForm.valid | json }}</pre> -->
+      <!-- <pre>Pristine: {{ myForm.pristine | json }}</pre> -->
+      <!-- <pre>Touched{{ myForm.touched | json }}</pre> -->
+      <!-- <pre>Value{{ myForm.value | json }}</pre> -->
+      <!-- <pre>Name - Errores: {{ myForm.controls['name'].errors | json }}</pre> -->
+    </div>
 
 
   </div>
 </section>
-
-

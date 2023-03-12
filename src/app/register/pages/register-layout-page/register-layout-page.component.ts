@@ -1,10 +1,8 @@
-import { Component } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { HobbiesService } from './../../services/hobbies.service';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { AbstractControl, FormBuilder, FormControl, FormGroup, ValidationErrors, Validators } from '@angular/forms';
+import { Hobbie } from '../../interfaces/hobbies.interface';
 
-interface Hobbies {
-  id:number;
-  name:string
-}
 
 
 @Component({
@@ -12,20 +10,18 @@ interface Hobbies {
   templateUrl: './register-layout-page.component.html',
   styleUrls: ['./register-layout-page.component.scss']
 })
-export class RegisterLayoutPageComponent {
+export class RegisterLayoutPageComponent implements OnInit{
 
-  url = '';
+  constructor( private fb:FormBuilder,
+               private hobbiesService: HobbiesService ){}
 
-  constructor( private fb:FormBuilder ){
-    this.hobbies = [
-      {id: 1, name: 'Jugar Fútbol'},
-      {id: 2, name: 'Jugar Basquetball'},
-      {id: 3, name: 'Jugar Tennis'},
-      {id: 4, name: 'Jugar Voleibol'},
-      {id: 5, name: 'Jugar Fifa'},
-      {id: 6, name: 'Jugar Videojuegos'},
-    ]
+  ngOnInit(): void {
+    this.hobbies = this.hobbiesService.hobbies;
   }
+
+
+  // CAPTURE PROFILE IMAGE
+  url:string = '';
 
   captureImg( e:any ){
     if( e.target.files){
@@ -39,21 +35,24 @@ export class RegisterLayoutPageComponent {
   }
 
 
+  // FORM DECLARATION
+  public value!:Date;
+  public firstNameAndLastnamePattern: string = '([a-zA-Z]+) ([a-zA-Z]+)';
+  public regExp = /\d{9}(-)\d/;
 
-
-    // Form
-  public hobbies:Hobbies[] = []
-  value!: Date;
-  text!:string;
-  results!:string[]
 
   public myForm: FormGroup = this.fb.group({
-    name: ['', [Validators.required, Validators.pattern('([a-zA-Z]+) ([a-zA-Z]+)')]],
+    name: ['', [Validators.required, Validators.pattern(this.firstNameAndLastnamePattern)]],
     hobbies: [''],
     dateOfBirth:['', [Validators.required]],
-    personalID:['', [Validators.required]]
-  })
+    personalID:['', [Validators.required, this.isAnAdult]],
+  }, {
+    validators: [
+      this.isAnAdult('dateOfBirth')
+    ]
+  });
 
+  // FORM VALIDATIONS AND NAME INPUT AND SUBMIT
 
   isValidField( field: string): boolean | null {
     return this.myForm.controls[ field ].errors && this.myForm.controls[field].touched;
@@ -78,6 +77,25 @@ export class RegisterLayoutPageComponent {
 
   }
 
+  getFieldErrorPersonalID( field: string ): string | null{
+    if (!this.myForm.controls[field]) return null;
+
+    const errors = this.myForm.controls[ field ].errors || {};
+
+    for (const key of Object.keys( errors )){
+      switch(key){
+        case 'required':
+          return 'Este campo es requerido';
+
+        case 'pattern':
+        return `El documento debe de ser 10 digitos`;
+      }
+    }
+
+    return null;
+
+  }
+
   submit():void {
     if ( this.myForm.invalid ) {
       this.myForm.markAllAsTouched()
@@ -87,20 +105,59 @@ export class RegisterLayoutPageComponent {
     this.myForm.reset({ name: ''});
   }
 
-  search2( keyword: string ):string[]{
-    let names: string[] = [];
 
-    for (let i = 0; i < this.hobbies.length; i++){
-      if( this.hobbies[i].name.includes( keyword )){
-        names.push( this.hobbies[i].name)
+
+  // HOBBIES GETTING DATA FROM SERVICE
+  public hobbies: Hobbie[] = []
+  filteredHobbies!: Hobbie[];
+
+  filterHobbies(event:any) {
+    let filtered : Hobbie[] = [];
+    let query = event.query;
+
+    for(let i = 0; i < this.hobbies.length; i++) {
+        let hobbie = this.hobbies[i];
+        if (hobbie.name.toLowerCase().indexOf(query.toLowerCase()) == 0) {
+            filtered.push(hobbie);
+        }
+    }
+    this.filteredHobbies = filtered;
+  }
+
+
+
+  //PERSONAL ID VALIDATION
+  age!:Date;
+  showAge!: number;
+  @ViewChild('documentIdRef')
+  public docIdREf!:ElementRef<HTMLInputElement>
+
+  addDash(){
+    const inputValue = this.docIdREf.nativeElement.value
+
+    if( inputValue.length === 9){
+      this.docIdREf.nativeElement.value = inputValue + '-';
+    }
+  }
+
+  isAnAdult( field: string ){
+
+    return ( formGroup: FormGroup ) => {
+      const dateOfBirthCapture = formGroup.get(field)?.value
+
+      const convertAge = new Date(dateOfBirthCapture);
+      const timeDiff = Math.abs(Date.now() - convertAge.getTime());
+      const age = Math.floor((timeDiff / (1000 * 3600 * 24))/365);
+
+      if( age > 18 ){
+        this.addDash()
+        formGroup.get('personalID')?.addValidators(Validators.pattern(this.regExp))
       }
+
     }
 
-    return names
   }
 
-  search(event:any){
-    this.results = this.search2( event.query)
-  }
 
 }
+
