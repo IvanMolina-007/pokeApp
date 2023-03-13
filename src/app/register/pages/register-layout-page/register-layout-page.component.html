@@ -9,23 +9,7 @@
     </div>
 
     <!-- IMAGE CARD -->
-    <div class="register__card">
-      <h4 class="register__card__title">Imágen perfil</h4>
-      <div class="register__card__image-container">
-        <img [src]="url" alt="" class="register__card__image-container__image">
-      </div>
-      <div class="input-container">
-        <input class="register__card__input"
-               type="file"
-               id="file"
-               class="hidden"
-               (change)="captureImg( $event )">
-        <label pla class="register__card__input-label" for="file">
-          Adjuntar Imagen
-          <img src="assets/cloud-icon.svg" alt="">
-        </label>
-      </div>
-    </div>
+    <app-image-profile (emitter)="captureUrl( $event )"></app-image-profile>
 
   </div>
 
@@ -102,19 +86,19 @@
 
 
         <!-- SUBMIT BUTTON -->
-        <button  type="submit" [disabled]="myForm.invalid">Continuar</button>
+        <button  type="submit" [disabled]="myForm.invalid || !url">Continuar</button>
 
       </div>
     </form>
 
     <div>
 
-      <!-- <pre>documento error: {{ myForm.controls['personalID'].errors | json }}</pre> -->
-      <!-- <pre>Valid: {{ myForm.valid | json }}</pre> -->
-      <!-- <pre>Pristine: {{ myForm.pristine | json }}</pre> -->
-      <!-- <pre>Touched{{ myForm.touched | json }}</pre> -->
-      <!-- <pre>Value{{ myForm.value | json }}</pre> -->
-      <!-- <pre>Name - Errores: {{ myForm.controls['name'].errors | json }}</pre> -->
+      <!-- <pre>documento error: {{ myForm.controls['personalID'].errors | json }}</pre>
+      <pre>Valid: {{ myForm.valid | json }}</pre>
+      <pre>Pristine: {{ myForm.pristine | json }}</pre>
+      <pre>Touched{{ myForm.touched | json }}</pre>
+      <pre>Value{{ myForm.value | json }}</pre>
+      <pre>Name - Errores: {{ myForm.controls['name'].errors | json }}</pre> -->
     </div>
 
 

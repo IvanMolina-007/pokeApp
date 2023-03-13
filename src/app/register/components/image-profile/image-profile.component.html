@@ -1,0 +1,17 @@
+<div class="register__card">
+  <h4 class="register__card__title">Imágen perfil</h4>
+  <div class="register__card__image-container">
+    <img [src]="url" alt="" class="register__card__image-container__image">
+  </div>
+  <div class="input-container">
+    <input class="register__card__input"
+           type="file"
+           id="file"
+           class="hidden"
+           (change)="captureImg( $event )">
+    <label pla class="register__card__input-label" for="file">
+      Adjuntar Imagen
+      <img src="assets/cloud-icon.svg" alt="">
+    </label>
+  </div>
+</div>

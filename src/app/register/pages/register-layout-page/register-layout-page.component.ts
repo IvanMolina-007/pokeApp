@@ -1,6 +1,6 @@
 import { HobbiesService } from './../../services/hobbies.service';
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
-import { AbstractControl, FormBuilder, FormControl, FormGroup, ValidationErrors, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Hobbie } from '../../interfaces/hobbies.interface';
 
 
@@ -19,26 +19,18 @@ export class RegisterLayoutPageComponent implements OnInit{
     this.hobbies = this.hobbiesService.hobbies;
   }
 
-
   // CAPTURE PROFILE IMAGE
-  url:string = '';
+  url!:string;
 
-  captureImg( e:any ){
-    if( e.target.files){
-      var reader = new FileReader();
-      reader.readAsDataURL( e.target.files[0]);
-      reader.onload=(event:any) => {
-        this.url = event.target.result
-      }
-    }
-
+  captureUrl( url:string ):void{
+    this.url = url;
   }
 
 
   // FORM DECLARATION
   public value!:Date;
   public firstNameAndLastnamePattern: string = '([a-zA-Z]+) ([a-zA-Z]+)';
-  public regExp = /\d{9}(-)\d/;
+  public regExp = /\d{8}(-)\d/;
 
 
   public myForm: FormGroup = this.fb.group({
@@ -98,7 +90,6 @@ export class RegisterLayoutPageComponent implements OnInit{
 
   submit():void {
     if ( this.myForm.invalid ) {
-      this.myForm.markAllAsTouched()
       return;
     };
     console.log( this.myForm.value );
@@ -135,7 +126,7 @@ export class RegisterLayoutPageComponent implements OnInit{
   addDash(){
     const inputValue = this.docIdREf.nativeElement.value
 
-    if( inputValue.length === 9){
+    if( inputValue.length === 8){
       this.docIdREf.nativeElement.value = inputValue + '-';
     }
   }

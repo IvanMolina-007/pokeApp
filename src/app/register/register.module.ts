@@ -1,15 +1,18 @@
+import { NgModule } from '@angular/core';
 import { PrimeNgModule } from './../prime-ng/prime-ng.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
 
 import { RegisterRoutingModule } from './register-routing.module';
 import { RegisterLayoutPageComponent } from './pages/register-layout-page/register-layout-page.component';
+import { ImageProfileComponent } from './components/image-profile/image-profile.component';
+import { RouterModule } from '@angular/router';
+import { CommonModule } from '@angular/common';
 
 
 @NgModule({
   declarations: [
-    RegisterLayoutPageComponent
+    RegisterLayoutPageComponent,
+    ImageProfileComponent
   ],
   exports:[
     RegisterLayoutPageComponent
@@ -19,7 +22,8 @@ import { RegisterLayoutPageComponent } from './pages/register-layout-page/regist
     RegisterRoutingModule,
     FormsModule,
     ReactiveFormsModule,
-    PrimeNgModule
+    PrimeNgModule,
+    RouterModule,
   ]
 })
 export class RegisterModule { }

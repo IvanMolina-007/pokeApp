@@ -1,11 +1,26 @@
 :root{
-  --main-title-dark-blue: #185A7D;
-  --paragraph-gray: #868686;
+  --color-primary-blue: #185A7D;
+  --color-secondary-blue: #2C85BC;
+  --color-light-blue: #E7EFF5;
+  --color-light-blue-secondary: #9BB8D3;
+  --color-blue: #01426A;
+  --color-paragraph-gray: #868686;
+  --color-yellow: #FFC600;
+  --color-black: #000000;
+  --color-white: #ffffff;
+  --color-light-gray: #E6E6E6;
+
+  --fw-small:    300;
+  --fw-regular:  400;
+  --fw-medium:   500;
+  --fw-semibold: 600;
+  --fw-bold:     700;
 }
 
 img{
   max-width: 100%;
 }
+
 *{
   padding: 0;
   margin: 0;
@@ -20,10 +35,10 @@ body{
 // Utility classes.
 .paragraph{
   font-style: normal;
-  font-weight: 400;
+  font-weight: var(--fw-regular);
   font-size: 18px;
   line-height: 27px;
-  color: #868686;
+  color: var(--color-paragraph-gray);
 }
 
 .hidden{

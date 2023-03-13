@@ -1,0 +1,64 @@
+
+.register__card{
+  width: 24.5rem;
+  margin-inline: auto;
+  background: var(--color-yellow);
+  border-radius: 50px;
+  overflow: hidden;
+  margin-bottom: 3rem;
+  &__title{
+    font-style: normal;
+    font-weight: var(--fw-regular);
+    font-size: 1.875rem;
+    line-height: 2.8125rem;
+    text-align: center;
+    color: var(--color-black);
+    margin-top: 3.5rem;
+    margin-bottom: 2.25rem;
+  }
+  &__image-container{
+    width: 16.8125rem;
+    height: 16.8125rem;
+    margin-inline: auto;
+    border: 14px solid var(--color-white);
+    overflow: hidden;
+    border-radius: 100%;
+    margin-bottom: 3.1875rem;
+    background-color: var(--color-light-blue);
+    position: relative;
+    z-index: 1;
+    &__image{
+      width: 100%;
+      height: auto;
+      z-index: 1000;
+    }
+  }
+  &__image-container::after{
+    content: '';
+    background: url('../../../../assets/user.png');
+    background-repeat: no-repeat;
+    background-position: center;
+    inset: 0;
+    position: absolute;
+    z-index: -100;
+  }
+
+  &__input-label{
+    cursor: pointer;
+    background-color: var(--color-white);
+    width: 70%;
+    font-style: normal;
+    margin-bottom: 4.625rem;
+    font-weight: var(--fw-semibold);
+    font-size: 0.875rem;
+    line-height: 120%;
+    color: var(--color-secondary-blue);
+    padding: 1.5rem;
+    border-radius: 10px;
+    margin-inline: auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border: 1px dashed var(--color-light-blue-secondary);
+  }
+}
