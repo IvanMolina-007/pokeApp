@@ -1,7 +1,9 @@
+import { FormDataService } from './../../../shared/services/form-data-service.service';
 import { HobbiesService } from './../../services/hobbies.service';
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Hobbie } from '../../interfaces/hobbies.interface';
+import { Router } from '@angular/router';
 
 
 
@@ -13,7 +15,9 @@ import { Hobbie } from '../../interfaces/hobbies.interface';
 export class RegisterLayoutPageComponent implements OnInit{
 
   constructor( private fb:FormBuilder,
-               private hobbiesService: HobbiesService ){}
+               private hobbiesService: HobbiesService,
+               private router: Router,
+               private formData:FormDataService ){}
 
   ngOnInit(): void {
     this.hobbies = this.hobbiesService.hobbies;
@@ -29,12 +33,11 @@ export class RegisterLayoutPageComponent implements OnInit{
 
   // FORM DECLARATION
   public value!:Date;
-  public firstNameAndLastnamePattern: string = '([a-zA-Z]+) ([a-zA-Z]+)';
   public regExp = /\d{8}(-)\d/;
 
 
   public myForm: FormGroup = this.fb.group({
-    name: ['', [Validators.required, Validators.pattern(this.firstNameAndLastnamePattern)]],
+    name: ['', [Validators.required]],
     hobbies: [''],
     dateOfBirth:['', [Validators.required]],
     personalID:['', [Validators.required, this.isAnAdult]],
@@ -59,9 +62,6 @@ export class RegisterLayoutPageComponent implements OnInit{
       switch(key){
         case 'required':
           return 'Este campo es requerido';
-
-        case 'pattern':
-        return `Debes ingresar un nombre y un apellido`;
       }
     }
 
@@ -88,12 +88,31 @@ export class RegisterLayoutPageComponent implements OnInit{
 
   }
 
+  savaLocalStorage( ){
+    const hobbies = this.myForm.controls['hobbies'].value
+    localStorage.setItem('url', this.url )
+    localStorage.setItem('name', this.myForm.controls['name'].value )
+    localStorage.setItem('hobbie', hobbies.name )
+    localStorage.setItem('age', this.userAge.toString() )
+    localStorage.setItem('personalID', this.myForm.controls['personalID'].value )
+  }
+
   submit():void {
     if ( this.myForm.invalid ) {
       return;
     };
-    console.log( this.myForm.value );
+
+    this.formData.sendFormData( {
+      url: this.url,
+      name: this.myForm.controls['name'].value,
+      hobbie: this.myForm.controls['hobbies'].value,
+      age: this.userAge.toString(),
+      personalID: this.myForm.controls['personalID'].value,
+    })
+
+    this.savaLocalStorage();
     this.myForm.reset({ name: ''});
+    this.router.navigate(['/pokemon-selection'])
   }
 
 
@@ -119,6 +138,7 @@ export class RegisterLayoutPageComponent implements OnInit{
 
   //PERSONAL ID VALIDATION
   age!:Date;
+  userAge!: number;
   showAge!: number;
   @ViewChild('documentIdRef')
   public docIdREf!:ElementRef<HTMLInputElement>
@@ -139,8 +159,9 @@ export class RegisterLayoutPageComponent implements OnInit{
       const convertAge = new Date(dateOfBirthCapture);
       const timeDiff = Math.abs(Date.now() - convertAge.getTime());
       const age = Math.floor((timeDiff / (1000 * 3600 * 24))/365);
+      this.userAge = age;
 
-      if( age > 18 ){
+      if( age >= 18 ){
         this.addDash()
         formGroup.get('personalID')?.addValidators(Validators.pattern(this.regExp))
       }

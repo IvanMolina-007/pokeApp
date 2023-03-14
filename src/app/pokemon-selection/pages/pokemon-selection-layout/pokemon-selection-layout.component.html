@@ -1,1 +1,41 @@
-<p>pokemon-selection-layout works!</p>
+<section class="register">
+  <div class="register__left-section">
+    <div class="register__title-container">
+      <h1 class="register__title">
+        <img class="register__title__icon" src="assets/arrow_back.svg" alt="">
+        ¡Ya casi términamos!
+      </h1>
+      <p class="register__paragraph paragraph">Revisa la información y completa lo solicitado.</p>
+    </div>
+
+    <!-- IMAGE CARD -->
+    <div class="register__card">
+      <h4 class="register__card__title">{{ name }}</h4>
+      <div class="register__card__image-container">
+        <img [src]="url" alt="" class="register__card__image-container__image">
+      </div>
+      <div class="register__card__personal-info-container">
+        <div class="register__card__personal-info-container__hobbie">
+          <p class="register__card__personal-info-container__hobbie__p1">Pasatiempo:</p>
+          <p class="register__card__personal-info-container__hobbie__p2">{{ hobbie }}</p>
+        </div>
+        <div class="register__card__personal-info-container__age">
+          <p class="register__card__personal-info-container__age__p1">Edad:</p>
+          <p class="register__card__personal-info-container__age__p2">{{ age }} años</p>
+        </div>
+        <div class="register__card__personal-info-container__personalID">
+          <p class="register__card__personal-info-container__personalID__p1">DUI:</p>
+          <p class="register__card__personal-info-container__personalID__p2">{{ personalID }}</p>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+
+  <div class="right-section">
+
+
+
+  </div>
+</section>

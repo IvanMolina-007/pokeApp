@@ -1,0 +1,112 @@
+.register{
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  &__title-container{
+    padding: 4rem  0 0 5.625rem;
+  }
+  &__title__icon{
+    position: absolute;
+    top: 15px;
+    left: -30px;
+  }
+  &__title{
+    font-weight: var(--fw-bold);
+    font-size: 2.1875rem;
+    line-height: 3.25rem;
+    color: var(--color-primary-blue);
+    margin-bottom: 0px;
+    position: relative;
+  }
+  &__card{
+    width: 24.5rem;
+    margin-inline: auto;
+    background: var(--color-yellow);
+    border-radius: 50px;
+    overflow: hidden;
+    margin-bottom: 3rem;
+    &__title{
+      text-transform: capitalize;
+      font-weight: var(--fw-bold);
+      font-size: 1.875rem;
+      line-height: 3.25rem;
+      text-align: center;
+      color: var(--color-primary-blue);
+      margin-top: 3.5rem;
+      margin-bottom: 1.5rem;
+    }
+    &__image-container{
+      width: 16.8125rem;
+      height: 16.8125rem;
+      margin-inline: auto;
+      border: 14px solid var(--color-white);
+      overflow: hidden;
+      border-radius: 100%;
+      margin-bottom: 2.5rem;
+      background-color: var(--color-light-blue);
+      position: relative;
+      z-index: 1;
+      &__image{
+        width: 100%;
+        height: auto;
+        z-index: 1000;
+      }
+
+    }
+    &__personal-info-container{
+      padding-inline: 2.5rem;
+      margin-bottom: 2.3125rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+      &__hobbie{
+        display: flex;
+        justify-content: space-between;
+        &__p1{
+          font-weight: var(--fw-bold);
+          font-size: 1.5rem;
+          line-height: 2rem;
+          color: var(--color-dark-gray);
+        }
+        &__p2{
+          font-weight: var(--fw-regular);
+          font-size: 1.5rem;
+          line-height: 2rem;
+          color: var(--color-dark-gray);
+        }
+      }
+      &__age{
+        display: flex;
+        justify-content: space-between;
+        &__p1{
+          font-weight: var(--fw-bold);
+          font-size: 1.5rem;
+          line-height: 2.25rem;
+          color: var(--color-dark-gray);
+        }
+        &__p2{
+          font-weight: var(--fw-regular);
+          font-size: 1.5rem;
+          line-height: 2.25rem;
+          color: var(--color-dark-gray);
+        }
+      }
+      &__personalID{
+        display: flex;
+        justify-content: space-between;
+        &__p1{
+          font-weight: var(--fw-bold);
+          font-size: 1.5rem;
+          line-height: 2.25rem;
+          color: var(--color-dark-gray);
+        }
+        &__p2{
+          font-weight: var(--fw-regular);
+          font-size: 1.5rem;
+          line-height: 2.25rem;
+          color: var(--color-dark-gray);
+        }
+      }
+    }
+
+}
+}

@@ -6,8 +6,8 @@ const routes: Routes = [
   {
     path:'',
     children: [
-      { path: 'pokemon-selecion', component: PokemonSelectionLayoutComponent},
-      { path: '**', redirectTo: 'pokemon-selecion'},
+      { path: '', component: PokemonSelectionLayoutComponent},
+      { path: '**', redirectTo: ''},
     ]
   }
 ];

@@ -5,10 +5,7 @@ import { RegisterLayoutPageComponent } from './pages/register-layout-page/regist
 const routes: Routes = [
   {
     path: '',
-    children: [
-      {path: 'sign-in', component: RegisterLayoutPageComponent},
-      {path: '**', redirectTo: 'sign-in'},
-    ]
+    component: RegisterLayoutPageComponent
   }
 ];
 
