@@ -40,7 +40,7 @@ export class RegisterLayoutPageComponent implements OnInit{
     name: ['', [Validators.required]],
     hobbies: [''],
     dateOfBirth:['', [Validators.required]],
-    personalID:['', [Validators.required, this.isAnAdult]],
+    personalID:['',  [ Validators.required, this.isAnAdult]],
   }, {
     validators: [
       this.isAnAdult('dateOfBirth')
@@ -80,7 +80,7 @@ export class RegisterLayoutPageComponent implements OnInit{
           return 'Este campo es requerido';
 
         case 'pattern':
-        return `El documento debe de ser 10 digitos`;
+        return `El documento debe de ser 9 digitos`;
       }
     }
 
@@ -94,7 +94,14 @@ export class RegisterLayoutPageComponent implements OnInit{
     localStorage.setItem('name', this.myForm.controls['name'].value )
     localStorage.setItem('hobbie', hobbies.name )
     localStorage.setItem('age', this.userAge.toString() )
-    localStorage.setItem('personalID', this.myForm.controls['personalID'].value )
+
+   if (this.userAge > 18){
+     localStorage.setItem('personalID', this.myForm.controls['personalID'].value )
+    } else {
+      localStorage.setItem('personalID', '0' )
+   }
+
+
   }
 
   submit():void {
@@ -140,6 +147,7 @@ export class RegisterLayoutPageComponent implements OnInit{
   age!:Date;
   userAge!: number;
   showAge!: number;
+  documentID:string = 'Documento*'
   @ViewChild('documentIdRef')
   public docIdREf!:ElementRef<HTMLInputElement>
 
@@ -166,6 +174,9 @@ export class RegisterLayoutPageComponent implements OnInit{
         formGroup.get('personalID')?.addValidators(Validators.pattern(this.regExp))
       }
 
+      if (age < 18){
+        this.documentID = 'Carnet de Minoridad'
+      }
     }
 
   }

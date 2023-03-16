@@ -18,7 +18,7 @@
     position: relative;
   }
   &__card{
-    width: 24.5rem;
+    width: 25rem;
     margin-inline: auto;
     background: var(--color-yellow);
     border-radius: 50px;
@@ -108,5 +108,78 @@
       }
     }
 
+  }
+  &__selection{
+    padding: 5rem 4rem 0 0;
+    &__title{
+      font-weight: var(--fw-regular);
+      font-size: 1.875;
+      line-height: 3rem;
+      color: var(--color-blue);
+    }
+    &__input-container{
+      margin-top: 1.5rem;
+      width: 100%;
+    }
+    &__input{
+      width: 100%;
+    }
+    &__pokemonList{
+      margin-top: 2rem;
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      row-gap: 2.5rem;
+      column-gap: 1rem;
+      height: 450px;
+      overflow-y: scroll;
+      padding-top: 20px;
+      padding-right: 1rem;
+      &__card{
+        background-color: #F2F2F2;        ;
+        border-radius: 20px;
+        &__img-container{
+          width: 85px;
+          margin-inline: auto;
+          position: relative;
+          z-index: 100;
+          img{
+            position: absolute;
+            top: -30px;
+
+          }
+        }
+        &__text-container{
+          margin-top: 4.5rem;
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+          background-color:#01426A;
+          padding-inline: 10px;
+          padding-block: 5px;
+          margin-bottom: 1rem;
+          margin-inline: 1rem;
+          border-radius: 10px;
+          p{
+            font-family: 'Poppins';
+            font-weight: 800;
+            font-size: 12px;
+            color: #FFFFFF;
+            margin: 0;
+
+          }
+        }
+      }
+    }
+
+  }
+
+
 }
+.right-section{
 }
+
+.selected{
+  background-color: var(--color-yellow);
+}
+
+

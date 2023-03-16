@@ -3,7 +3,10 @@ import { InputTextModule } from 'primeng/inputtext';
 import { DropdownModule } from 'primeng/dropdown';
 import { CalendarModule } from 'primeng/calendar';
 import { ButtonModule } from 'primeng/button';
-import {AutoCompleteModule} from 'primeng/autocomplete';
+import { AutoCompleteModule} from 'primeng/autocomplete';
+import { OrderListModule } from 'primeng/orderlist';
+
+
 
 
 
@@ -12,7 +15,8 @@ const modules = [
   DropdownModule,
   CalendarModule,
   ButtonModule,
-  AutoCompleteModule
+  AutoCompleteModule,
+  OrderListModule
 ];
 
 
