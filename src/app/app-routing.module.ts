@@ -11,6 +11,10 @@ const routes: Routes = [
     loadChildren: () => import('./pokemon-selection/pokemon-selection.module').then(m => m.PokemonSelectionModule)
   },
   {
+    path: 'home',
+    loadChildren: () => import('./home-page/home-page.module').then(m => m.HomePageModule)
+  },
+  {
     path: '**',
     redirectTo: 'register'
   }

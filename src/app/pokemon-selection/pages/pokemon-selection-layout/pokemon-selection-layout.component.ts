@@ -1,6 +1,7 @@
 import { PokemonHttpService } from './../../../shared/services/pokemon-http.service';
 import { Component, OnDestroy, OnInit, ElementRef, ViewChild } from '@angular/core';
 import { FormDataService } from '../../../shared/services/form-data-service.service';
+import { Router } from '@angular/router';
 
 
 interface PokemonDatails {
@@ -24,22 +25,13 @@ export class PokemonSelectionLayoutComponent implements OnInit, OnDestroy {
   pokemonList:PokemonDatails[] = [];
   selectedPokemon:any[] = []
 
-  products = [
-    { name: 'hola', id: 1 },
-    { name: 'hola', id: 2 },
-    { name: 'hola', id: 3 },
-    { name: 'hola', id: 3 },
-    { name: 'hola', id: 3 },
-    { name: 'hola', id: 3 },
-    { name: 'hola', id: 3 },
-    { name: 'hola', id: 3 },
-  ]
 
   @ViewChild('txtTagInput')
   searchInput!: ElementRef<HTMLInputElement>;
 
   constructor( private formData:FormDataService,
-               private pokemonService: PokemonHttpService){
+               private pokemonService: PokemonHttpService,
+               private router: Router){
 
                }
 
@@ -134,8 +126,10 @@ export class PokemonSelectionLayoutComponent implements OnInit, OnDestroy {
 
   }
 
-  isSelected( i:number){
-    return this.selectedPokemon.indexOf( i );
+  onSubmit(){
+    this.pokemonService.threeSelectdPokemons = this.selectedPokemon;
+    this.router.navigate(['/home'])
+
   }
 
 

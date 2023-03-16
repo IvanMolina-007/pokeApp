@@ -8,6 +8,7 @@ import { Pokemon } from '../interfaces/pokemon.interface';
 })
 export class PokemonHttpService {
   public url:string = 'https://pokeapi.co/api/v2/'
+  threeSelectdPokemons: Pokemon[] = []
 
   constructor( private http:HttpClient) {}
 
